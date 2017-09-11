@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Volunteers</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<h1 style="margin-left:15px"> Volunteers</h1>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="row">
+					<!-- Search and Buttons -->
+					<div class="col-sm-3">
+						<form class="navbar-form" role="search">
+							<div class="input-group add-on">
+								<input align="left" class="form-control" placeholder="Search Names" ng-model="searchVols" name="srch-term" id="srch-term" type="text">
+								<div class="input-group-btn">
+									<button id="srch-term" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- End Search and Buttons -->
+					<!-- Filters -->
+					<div class="edit_controls">
+						<a class="btn btn-primary" ng-click="show()"><span class="glyphicon glyphicon-plus"></span> Add Volunteer</a>
+						&nbsp;
+						<a class="btn btn-success" title="Export" ng-click="csv.generate()" ng-href="{{csv.link()}}" download="volunteertable.csv"><span class="glyphicon glyphicon-export"></span> Export List</a>
+						&nbsp;
+						<input type="checkbox" ng-model="showActiveCanvas" ng-false-value=""> Canvas
+						&nbsp;
+						<input type="checkbox" ng-model="showActivePhoneBank" ng-false-value=""> PhoneBank
+						&nbsp;
+						<input type="checkbox" ng-model="showActiveStandout" ng-false-value=""> Standout
+					</div>
+					<!-- End Filters -->
+				</div>
+
+				<!-- New Volunteer Modal -->
+				<script type="text/ng-template" id="modal.html">
+					<div class="modal fade">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h3 class="modal-title">Volunteer Information</h3>
+								</div>
+								<div class="modal-body">
+									<form ng-submit="saveVol()">
+										<div class="form-group">
+											<label for="first">First</label>
+											<input type="text" class="form-control" ng-model="firstName" id="firstName" />
+											<label for="last">Last</label>
+											<input type="text" class="form-control" ng-model="lastName" id="lastName" />
+											<label for="phone">Phone</label>
+											<input type="text" class="form-control" ng-model="phone" id="phone" />
+											<label for="email">Email</label>
+											<input type="email" class="form-control" ng-model="email" id="email" />
+											<label for="city">City</label>
+											<input type="text" class="form-control" ng-model="city" id="city" />
+											<h4>Willing to:</h4>
+											<label><input type="checkbox" ng-model="canvas"> Canvas</label>
+											&nbsp;
+											<label><input type="checkbox" ng-model="phoneBank"> PhoneBank</label>
+											&nbsp;
+											<label><input type="checkbox" ng-model="standOut"> Standout</label>
+											<!--<button type="submit" class="btn btn-success">Submit</button>-->
+											<br />
+											<br />
+											<button type="submit" class="btn btn-success">Submit</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</script>
+				<!-- End Modal-->
+
+				<div>
+					<!-- Main Table -->
+					<table class="table table-striped" export-csv="csv">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>
+									<a href="" ng-click="sortType = 'FirstName'; sortReverse = !sortReverse">
+										First
+										<span ng-show="sortType == 'FirstName' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+										<span ng-show="sortType == 'FirstName' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+									</a>
+								</th>
+								<th>
+									<a href="" ng-click="sortType = 'LastName'; sortReverse = !sortReverse">
+										Last
+										<span ng-show="sortType == 'LastName' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+										<span ng-show="sortType == 'LastName' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+									</a>
+								</th>
+								<th>
+									<a href="" ng-click="sortType = 'Phone'; sortReverse = !sortReverse">
+										Phone
+										<span ng-show="sortType == 'Phone' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+										<span ng-show="sortType == 'Phone' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+									</a>
+								</th>
+								<th>
+									<a href="" ng-click="sortType = 'Email'; sortReverse = !sortReverse">
+										Email
+										<span ng-show="sortType == 'Email' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+										<span ng-show="sortType == 'Email' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+									</a>
+								</th>
+								<th>
+									<a href="" ng-click="sortType = 'City'; sortReverse = !sortReverse">
+										City
+										<span ng-show="sortType == 'City' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+										<span ng-show="sortType == 'City' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+									</a>
+								</th>
+								<th>
+									<a href="" ng-click="sortType = 'Canvas'; sortReverse = !sortReverse">
+										Canvas
+										<span ng-show="sortType == 'Canvas' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+										<span ng-show="sortType == 'Canvas' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+									</a>
+								</th>
+								<th>
+									<a href="" ng-click="sortType = 'PhoneBank'; sortReverse = !sortReverse">
+										PhoneBank
+										<span ng-show="sortType == 'PhoneBank' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+										<span ng-show="sortType == 'PhoneBank' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+									</a>
+								</th>
+								<th>
+									<a href="" ng-click="sortType = 'Standout'; sortReverse = !sortReverse">
+										Standout
+										<span ng-show="sortType == 'Standout' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+										<span ng-show="sortType == 'Standout' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+									</a>
+								</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="volunteer in volunteerList | orderBy:sortType:sortReverse | filter:searchVols | filter:{Canvas:showActiveCanvas} | filter:{PhoneBank:showActivePhoneBank} | filter:{Standout:showActiveStandout} track by $index" ng-include="getTemplate(volunteer)"></tr>
+						</tbody>
+					</table>
+					<!-- End Main Table -->
+
+					<script type="text/ng-template" id="display">
+						<td>{{$index+1}}</td>
+						<td ng-bind="volunteer.FirstName">{{volunteer.FirstName}}</td>
+						<td ng-bind="volunteer.LastName">{{volunteer.LastName}}</td>
+						<td ng-bind="volunteer.Phone">{{volunteer.Phone}}</td>
+						<td ng-bind="volunteer.Email"></td>
+						<td ng-bind="volunteer.City"></td>
+						<td ng-bind="volunteer.Canvas"></td>
+						<td ng-bind="volunteer.PhoneBank"></td>
+						<td ng-bind="volunteer.Standout"></td>
+						<td><button class="btn btn-primary" ng-click="editVol(volunteer)">Edit <i class="glyphicon glyphicon-edit"></i></button></td>
+						<td><button class="btn btn-danger" type="button" ng-click="removeRow(volunteer)"><span class="glyphicon glyphicon-remove"></span></button></td>
+					</script>
+
+					<script type="text/ng-template" id="edit">
+						<td>{{$index+1}}</td>
+						<td><input class="form-control" type="text" ng-model="volunteerList.selected.FirstName" /></td>
+						<td><input class="form-control" type="text" ng-model="volunteerList.selected.LastName" /></td>
+						<td><input class="form-control" type="text" ng-model="volunteerList.selected.Phone" /></td>
+						<td><input class="form-control" type="text" ng-model="volunteerList.selected.Email" /></td>
+						<td><input class="form-control" type="text" ng-model="volunteerList.selected.City" /></td>
+						<td><input type="checkbox" ng-model="volunteerList.selected.Canvas" /></td>
+						<td><input type="checkbox" ng-model="volunteerList.selected.PhoneBank" /></td>
+						<td><input type="checkbox" ng-model="volunteerList.selected.Standout" /></td>
+						<td>
+							<button class="btn btn-success" ng-click="editSaveVol(volunteerList.selected.Id)">Save</button>
+							<button class="btn btn-default" ng-click="reset()">Cancel</button>
+						</td>
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

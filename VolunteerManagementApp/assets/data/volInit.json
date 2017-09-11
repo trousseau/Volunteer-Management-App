@@ -1,0 +1,75 @@
+﻿{
+  "volunteerInitList":[
+    {
+      "FirstName": "Bender",
+      "LastName": "Rodriguez",
+      "Phone": "555-555-5555",
+      "Email": "bender@saysomethingelse.com",
+      "City": "Tijuana",
+      "Standout": false,
+      "PhoneBank": false,
+      "Canvas": false
+    },
+    {
+      "FirstName": "John",
+      "LastName": "Lennon",
+      "Phone": "555-555-5555",
+      "Email": "john@beatles.com",
+      "City": "Liverpool",
+      "Standout": true,
+      "PhoneBank": true,
+      "Canvas": true
+    },
+    {
+      "FirstName": "Stevie",
+      "LastName": "Wonder",
+      "Phone": "555-555-5555",
+      "Email": "stevie@motown.com",
+      "City": "Saginaw",
+      "Standout": true,
+      "PhoneBank": true,
+      "Canvas": true
+    },
+    {
+      "FirstName": "Luke",
+      "LastName": "Skywalker",
+      "Phone": "555-555-5555",
+      "Email": "luke@theforce.com",
+      "City": "Tatooine",
+      "Standout": false,
+      "PhoneBank": true,
+      "Canvas": true
+    },
+    {
+      "FirstName": "Daenerys",
+      "LastName": "Targaryen",
+      "Phone": "555-555-5555",
+      "Email": "motherofdragons@housetargaryen.com",
+      "City": "Dragonstone",
+      "Standout": true,
+      "PhoneBank": true,
+      "Canvas": false
+    },
+    {
+      "FirstName": "Marty",
+      "LastName": "McFly",
+      "Phone": "555-555-5555",
+      "Email": "marty@backtothefuture.com",
+      "City": "Hill Valley",
+      "Standout": false,
+      "PhoneBank": true,
+      "Canvas": false
+    },
+    {
+      "FirstName": "Frodo",
+      "LastName": "Baggins",
+      "Phone": "555-555-5555",
+      "Email": "frodo@thering.com",
+      "City": "The Shire",
+      "Standout": true,
+      "PhoneBank": false,
+      "Canvas": false
+    }
+  ],
+  "selected": {}
+}
